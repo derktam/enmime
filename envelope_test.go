@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jhillyerd/enmime"
-	"github.com/jhillyerd/enmime/internal/test"
+	"github.com/derktam/enmime"
+	"github.com/derktam/enmime/internal/test"
 )
 
 func TestParseHeaderOnly(t *testing.T) {

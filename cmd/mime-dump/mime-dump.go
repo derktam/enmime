@@ -6,8 +6,8 @@ import (
 	"os"
 	"path"
 
-	"github.com/jhillyerd/enmime"
-	"github.com/jhillyerd/enmime/cmd"
+	"github.com/derktam/enmime"
+	"github.com/derktam/enmime/cmd"
 )
 
 func main() {

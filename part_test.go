@@ -3,8 +3,8 @@ package enmime_test
 import (
 	"testing"
 
-	"github.com/jhillyerd/enmime"
-	"github.com/jhillyerd/enmime/internal/test"
+	"github.com/derktam/enmime"
+	"github.com/derktam/enmime/internal/test"
 )
 
 func TestPlainTextPart(t *testing.T) {

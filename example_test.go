@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/jhillyerd/enmime"
+	"github.com/derktam/enmime"
 )
 
 func ExampleReadEnvelope() {

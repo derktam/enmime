@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jhillyerd/enmime"
+	"github.com/derktam/enmime"
 )
 
 // Syntatic sugar for Part comparisons

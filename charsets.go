@@ -16,6 +16,7 @@ import (
 	"golang.org/x/text/encoding/traditionalchinese"
 	"golang.org/x/text/encoding/unicode"
 	"golang.org/x/text/transform"
+	"github.com/djimenez/iconv-go"
 )
 
 /* copy from golang.org/x/net/html/charset/table.go */
@@ -265,12 +266,32 @@ func init() {
 	}
 }
 
+func convert2022krToUTF8String(textBytes []byte) (string, error) {
+	var tmpDec string
+	var err error
+	if tmpDec, err = iconv.ConvertString(string(textBytes), "iso-2022-kr", "utf-8"); err == nil {
+		return tmpDec, nil
+	}
+
+	return tmpDec, err
+}
+
+
+func ConvertToUTF8String(charset string, textBytes []byte) (string, error) {
+	return convertToUTF8String(charset, textBytes)
+}
+
 // convertToUTF8String uses the provided charset to decode a slice of bytes into a normal
 // UTF-8 string.
 func convertToUTF8String(charset string, textBytes []byte) (string, error) {
 	if strings.ToLower(charset) == "utf-8" {
 		return string(textBytes), nil
 	}
+
+	if strings.ToLower(charset) == "iso-2022-kr" {
+		return convert2022krToUTF8String(textBytes)
+	}
+
 	csentry, ok := encodings[strings.ToLower(charset)]
 	if !ok {
 		return "", fmt.Errorf("Unsupported charset %q", charset)
@@ -282,6 +303,11 @@ func convertToUTF8String(charset string, textBytes []byte) (string, error) {
 		return "", err
 	}
 	return string(output), nil
+}
+
+
+func NewCharsetReader(charset string, input io.Reader) (io.Reader, error) {
+	return newCharsetReader(charset, input)
 }
 
 // newCharsetReader generates charset-conversion readers, converting from the provided charset into
